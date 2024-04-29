@@ -1,0 +1,108 @@
+---
+title: "Div Sup Analysis"
+output: html_document
+date: "2024-04-29"
+---
+
+```{r, include = F}
+library(tidyverse)
+library(broom)
+library(here)
+library(scales)
+library(kableExtra)
+library(oddsratio)
+
+clean_data <- readRDS(here("Clean Data.rds"))
+
+# Functions
+# CI's using Wilson's score method (see Newcombe 1998)
+prop_ci <- Vectorize(function(x, n, side = c("lower", "upper")) {
+  
+  test_output <- prop.test(x = x, n = n)
+  
+  if(side == "lower") {
+    
+    return(test_output$conf.int[1])
+    
+  } else if(side == "upper") {
+    
+    return(test_output$conf.int[2])
+    
+  }
+  
+})
+
+my_figure <- function(x, y) {
+  
+  plot_data <- clean_data %>%
+    drop_na({{x}}, {{y}}) %>%
+    group_by({{x}}) %>%
+    summarize(
+      x = sum({{y}}),
+      n = n()
+    ) %>%
+    mutate(
+      mean = x / n,
+      lower = prop_ci(x, n, "lower"),
+      upper = prop_ci(x, n, "upper")
+    )
+  
+  print(plot_data)
+  
+  plot <- plot_data %>%
+    ggplot(aes({{x}}, mean)) +
+    geom_col() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = .5) +
+    scale_y_continuous(name = substitute(y), limits = c(0, 1), labels = percent) +
+    theme_classic()
+
+  return(plot)
+  
+}
+
+my_model <- function(formula, incr) {
+  
+  model_output <- glm(
+    data = clean_data,
+    formula,
+    family = "binomial"
+  )
+
+  odds_ratios <- or_glm(clean_data, model_output, incr = incr)
+
+  p_values <- model_output %>%
+    tidy() %>%
+    select(predictor = term, p.value)
+  
+  out <- left_join(odds_ratios, p_values, by = "predictor")
+  
+  out %>%
+    kable(digits = 3) %>%
+    kable_styling() %>%
+    return()
+  
+}
+```
+
+## Application Status by Respondent Characteristics
+
+```{r, echo = F, warning = F}
+my_model(
+  formula = div_sup_applied ~ age + gender + race_ethnicity + discipline,
+  incr = list(age = 10)
+)
+
+my_figure(age_binned, div_sup_applied)
+my_figure(gender, div_sup_applied)
+my_figure(race_ethnicity, div_sup_applied)
+my_figure(discipline, div_sup_applied)
+```
+
+## Application Success by Respondent Characteristics
+
+```{r, echo = F, warning = F}
+my_figure(age_binned, div_sup_granted)
+my_figure(gender, div_sup_granted)
+my_figure(race_ethnicity, div_sup_granted)
+my_figure(discipline, div_sup_granted)
+```
