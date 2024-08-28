@@ -1,0 +1,379 @@
+---
+title: "DivSup: Full-Sample Analyses for JAMA Letter"
+output: html_document
+---
+
+```{r, include = F}
+## Load packages
+library(tidyverse)
+library(broom)
+library(here)
+library(scales)
+library(kableExtra)
+library(oddsratio)
+library(modelsummary)
+`%+%` <- paste0
+
+
+## Load data
+clean_data <- readRDS(here("Data", "Clean Data.rds"))
+
+
+## Set global variables
+researcher_characteristics <- c(
+  "age",
+  "gender_factor",
+  "race_ethnicity_factor",
+  "discipline_factor",
+  "institution_type",
+  "job_title",
+  "research_time",
+  "research_funding",
+  "years_experience",
+  "mentor_undergrad",
+  "mentor_postbac",
+  "mentor_masters",
+  "mentor_doctoral",
+  "mentor_postdoc",
+  "mentor_ecr"
+)
+
+
+## Functions
+# Return mean and SD for numeric variables
+mean_sd <- function(x) {
+  
+  clean_data %>%
+    summarize(
+      mean = mean(get(x), na.rm = T),
+      sd = sd(get(x), na.rm = T)
+    ) %>%
+    kable() %>%
+    kable_styling() %>%
+    return()
+  
+}
+
+# Return n's and percents for categorical variables
+n_pct <- function(x) {
+  
+  clean_data %>%
+    count(get(x)) %>%
+    rename({{x}} := `get(x)`) %>%
+    mutate(pct = percent(n / sum(n), .1)) %>%
+    kable() %>%
+    kable_styling() %>%
+    return()
+  
+}
+
+# CI's using Wilson's score method (see Newcombe 1998)
+prop_ci <- Vectorize(function(x, n, side = c("lower", "upper")) {
+  
+  test_output <- prop.test(x = x, n = n)
+  
+  if(side == "lower") {
+    
+    return(test_output$conf.int[1])
+    
+  } else if(side == "upper") {
+    
+    return(test_output$conf.int[2])
+    
+  }
+  
+})
+
+# Chi-square test output
+print_chisq <- function(chisq.test) {
+  
+  statistic <- chisq.test$statistic %>%
+    round(3)
+  
+  df <- chisq.test$parameter
+  
+  p <- chisq.test$p.value %>%
+    round(3)
+  
+  print("X2 (" %+% df %+% ") = " %+% statistic %+% ", p = " %+% p)
+  
+}
+```
+
+## Descriptive Statistics
+
+```{r}
+mean_sd("age")
+mean_sd("years_experience")
+mean_sd("research_time")
+mean_sd("research_funding")
+
+n_pct("gender")
+n_pct("race_ethnicity")
+n_pct("discipline")
+n_pct("institution_type")
+n_pct("job_title")
+n_pct("mentor_undergrad")
+n_pct("mentor_postbac")
+n_pct("mentor_masters")
+n_pct("mentor_doctoral")
+n_pct("mentor_postdoc")
+n_pct("mentor_ecr")
+
+n_pct("div_sup_applied")
+n_pct("div_sup_granted")
+```
+
+## Uptake by Researcher Characteristics
+
+```{r, results = "asis"}
+# Bivariate models
+for(x in researcher_characteristics) {
+  
+  model <- glm(
+    data = clean_data,
+    formula = as.formula("div_sup_applied ~ " %+% x),
+    family = "binomial"
+  )
+  
+  model %>%
+    summary() %>%
+    coef() %>%
+    kable() %>%
+    kable_styling()
+    
+  or <- or_glm(clean_data, model, incr = list(
+    age = 10,
+    research_time = 10,
+    research_funding = 10,
+    years_experience = 10
+  ))
+  
+  or %>%
+    kable() %>%
+    kable_styling() %>%
+    print()
+  
+}
+```
+
+```{r}
+# Combined model
+combined_model <- glm(
+  data = clean_data,
+  formula = as.formula("div_sup_applied ~ " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+combined_model %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or <- or_glm(clean_data, combined_model, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+))
+  
+or %>%
+  kable() %>%
+  kable_styling()
+```
+
+## Success by Researcher Characteristics
+
+```{r, results = "asis"}
+data_success <- clean_data %>%
+  mutate(
+    gender_factor = na_if(gender_factor, "TGD"),
+    discipline_factor = na_if(discipline_factor, "Social Psychology"),
+    institution_type = na_if(institution_type, "Small College")
+  )
+
+# Bivariate models
+for(x in researcher_characteristics) {
+  
+  model <- glm(
+    data = data_success,
+    formula = as.formula("div_sup_granted ~ " %+% x),
+    family = "binomial"
+  )
+  
+  model %>%
+    summary() %>%
+    coef() %>%
+    kable() %>%
+    kable_styling()
+  
+  or <- or_glm(data_success, model, incr = list(
+    age = 10,
+    research_time = 10,
+    research_funding = 10,
+    years_experience = 10
+  ))
+  
+  or %>%
+    kable() %>%
+    kable_styling() %>%
+    print()
+  
+}
+```
+
+```{r}
+# Combined model
+combined_model <- glm(
+  data = data_success,
+  formula = as.formula("div_sup_granted ~ " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+combined_model %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or <- or_glm(data_success, combined_model, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+))
+  
+or %>%
+  kable() %>%
+  kable_styling()
+```
+
+## Success by Grant and Trainee Characteristics 
+
+NOTE: This may not be useful, since data are scoped to respondent, not grant application...
+
+In fact, this doesn't even converge...
+
+```{r}
+# grant_characteristics <- c(
+#   "supported_undergrad",
+#   "supported_postbac",
+#   "supported_masters",
+#   "supported_doctoral",
+#   "supported_postdoc",
+#   "supported_ecr",
+#   "parent_grant_type_R01",
+#   "parent_grant_type_R34",
+#   "parent_grant_type_R6133",
+#   "parent_grant_type_other",
+#   "parent_grant_year_1",
+#   "parent_grant_year_2",
+#   "parent_grant_year_3",
+#   "parent_grant_year_4",
+#   "parent_grant_year_5",
+#   "parent_grant_year_NCE"
+# )
+#
+# # Bivariate models
+# for(x in grant_characteristics) {
+#   
+#   model <- glm(
+#     data = clean_data,
+#     formula = as.formula("div_sup_applied ~ " %+% x),
+#     family = "binomial"
+#   )
+#   
+#   or <- or_glm(clean_data, model, incr = list(
+#     age = 10,
+#     research_time = 10,
+#     research_funding = 10,
+#     years_experience = 10
+#   ))
+#   
+#   or %>%
+#     kable() %>%
+#     kable_styling() %>%
+#     print()
+#   
+# }
+# 
+# # Combined model
+# combined_model <- glm(
+#   data = clean_data,
+#   formula = as.formula("div_sup_applied ~ " %+% paste0(grant_characteristics, collapse = " + ")),
+#   family = "binomial"
+# )
+# 
+# summary(combined_model)
+# 
+# or <- or_glm(clean_data, combined_model, incr = list(
+#   age = 10,
+#   research_time = 10,
+#   research_funding = 10,
+#   years_experience = 10
+# ))
+#   
+# or %>%
+#   kable() %>%
+#   kable_styling()
+```
+
+## Barriers
+
+```{r}
+barrier_summary_data <- clean_data %>%
+  count(top_barrier) %>%
+  drop_na() %>%
+  mutate(
+    top_barrier = fct_reorder(top_barrier, n),
+    prop = n / sum(n),
+    lower = prop_ci(n, sum(n), "lower"),
+    upper = prop_ci(n, sum(n), "upper")
+  )
+
+barrier_summary_data %>%
+  kable() %>%
+  kable_styling()
+
+barrier_summary_data %>%
+  ggplot(aes(top_barrier, prop)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = .5) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = NULL, labels = percent) +
+  coord_flip() +
+  theme_classic()
+
+# Do non-White respondents experience different barriers?
+barriers_with_sufficient_n <- clean_data %>%
+  drop_na(race_ethnicity, top_barrier) %>%
+  count(race_ethnicity != "White non-Hispanic", top_barrier) %>%
+  filter(n >= 5) %>%
+  count(top_barrier) %>%
+  filter(n == 2) %>%
+  pull(top_barrier)
+```
+
+```{r, results = "asis"}
+for(x in barriers_with_sufficient_n) {
+  
+  print("<br>")
+  
+  print(x)
+  
+  clean_data %>%
+    count(race_ethnicity != "White non-Hispanic", top_barrier == x) %>%
+    rename(!!x := "top_barrier == x") %>%
+    drop_na() %>%
+    group_by(`race_ethnicity != "White non-Hispanic"`) %>%
+    mutate(groupwise_percent = percent(n / sum(n))) %>%
+    kable() %>%
+    kable_styling() %>%
+    print()
+  
+  chisq.test(clean_data$race_ethnicity != "White non-Hispanic", clean_data$top_barrier == x) %>%
+    print_chisq()
+  
+}
+```

@@ -1,0 +1,469 @@
+---
+title: "DivSup: Psychologist-Focused Analyses for PS"
+output: html_document
+---
+
+```{r, include = F}
+## Load packages
+library(tidyverse)
+library(broom)
+library(here)
+library(scales)
+library(kableExtra)
+library(oddsratio)
+library(modelsummary)
+`%+%` <- paste0
+
+
+## Load data
+clean_data <- readRDS(here("Data", "Clean Data.rds")) %>%
+  drop_na(discipline_psych)
+
+
+## Create model-ready data
+# Collapse or remove categories that don't have a big enough sample size
+model_data <- clean_data %>%
+  mutate(
+    
+    # Remove TGD category, as it's too small for analysis (and can't be meaninfully collapsed into another category)
+    gender_recoded = na_if(gender_factor, "TGD"),
+    
+    # Recode institution_type
+    institution_type_recoded = case_when(
+      institution_type %in% c("University/psychology department", "Academic Medical Center") ~ institution_type,
+      !is.na(institution_type) ~ "Other",
+      T ~ NA_character_
+    ) %>%
+      factor() %>%
+      relevel(ref = "Other"),
+    
+    # Recode job title
+    job_title_recoded = case_when(
+      job_title %in% c("Assistant Professor", "Associate Professor", "Full Professor") ~ job_title,
+      !is.na(job_title) ~ "Other",
+      T ~ NA_character_
+    ) %>%
+      factor() %>%
+      relevel(ref = "Other")
+    
+  )
+
+
+## Global variables
+researcher_characteristics <- c(
+  "age",
+  "gender_recoded",
+  "race_ethnicity_recoded",
+  "institution_type_recoded",
+  "job_title_recoded",
+  "research_time",
+  "research_funding",
+  "years_experience",
+  "mentor_undergrad",
+  "mentor_postbac",
+  "mentor_masters",
+  "mentor_doctoral",
+  "mentor_postdoc",
+  "mentor_ecr"
+)
+
+
+## Custom functions
+# Return mean and SD for numeric variables
+mean_sd <- function(x) {
+  
+  clean_data %>%
+    group_by(discipline_psych) %>%
+    summarize(
+      mean = mean(get(x), na.rm = T),
+      sd = sd(get(x), na.rm = T)
+    ) %>%
+    pivot_wider(
+      names_from = "discipline_psych",
+      values_from = c("mean", "sd")
+    ) %>%
+    mutate(variable = x) %>%
+    select(
+      variable,
+      psych_mean = mean_TRUE,
+      psych_sd = sd_TRUE,
+      non_mean = mean_FALSE,
+      non_sd = sd_FALSE
+    ) %>%
+    kable(digits = 1) %>%
+    kable_styling() %>%
+    return()
+  
+}
+
+# Return n's and percents for categorical variables
+n_pct <- function(x) {
+  
+  clean_data %>%
+    group_by(discipline_psych) %>%
+    count(get(x)) %>%
+    rename({{x}} := `get(x)`) %>%
+    mutate(pct = percent(n / sum(n), .1)) %>%
+    pivot_wider(
+      names_from = "discipline_psych",
+      values_from = c("n", "pct")
+    ) %>%
+    select(
+      all_of(x),
+      psych_n = n_TRUE,
+      psych_pct = pct_TRUE,
+      non_n = n_FALSE,
+      non_pct = pct_FALSE
+    ) %>%
+    kable() %>%
+    kable_styling() %>%
+    return()
+  
+}
+
+# CI's using Wilson's score method (see Newcombe 1998)
+prop_ci <- Vectorize(function(x, n, side = c("lower", "upper")) {
+  
+  test_output <- prop.test(x = x, n = n)
+  
+  if(side == "lower") {
+    
+    return(test_output$conf.int[1])
+    
+  } else if(side == "upper") {
+    
+    return(test_output$conf.int[2])
+    
+  }
+  
+})
+
+# Chi-square test output
+print_chisq <- function(chisq.test) {
+  
+  statistic <- chisq.test$statistic %>%
+    round(3)
+  
+  df <- chisq.test$parameter
+  
+  p <- chisq.test$p.value %>%
+    round(3)
+  
+  print("X2 (" %+% df %+% ") = " %+% statistic %+% ", p = " %+% p)
+  
+}
+```
+
+## Descriptive Statistics
+
+```{r}
+clean_data %>%
+  count(discipline_psych) %>%
+  kable() %>%
+  kable_styling()
+
+mean_sd("age")
+mean_sd("years_experience")
+mean_sd("research_time")
+mean_sd("research_funding")
+
+n_pct("gender")
+n_pct("race_ethnicity")
+n_pct("discipline")
+n_pct("institution_type")
+n_pct("job_title")
+n_pct("mentor_undergrad")
+n_pct("mentor_postbac")
+n_pct("mentor_masters")
+n_pct("mentor_doctoral")
+n_pct("mentor_postdoc")
+n_pct("mentor_ecr")
+
+n_pct("div_sup_applied")
+n_pct("div_sup_granted")
+```
+
+## Cross-Discipline Comparisons
+
+### Uptake by Discipline
+
+```{r}
+# Bivariate
+uptake_by_dis <- glm(
+  data = model_data,
+  formula = div_sup_applied ~ discipline_psych,
+  family = "binomial"
+)
+
+uptake_by_dis %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or_glm(model_data, uptake_by_dis) %>%
+  kable(digits = 2) %>%
+  kable_styling()
+
+# Adjusted
+uptake_by_dis_adj <- glm(
+  data = model_data,
+  formula = as.formula("div_sup_applied ~ discipline_psych + " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+uptake_by_dis_adj %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or_glm(model_data, uptake_by_dis_adj, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+)) %>%
+  kable(digits = 2) %>%
+  kable_styling()
+```
+
+### Success by Discipline
+
+```{r}
+# Bivariate
+success_by_dis <- glm(
+  data = model_data,
+  formula = div_sup_granted ~ discipline_psych,
+  family = "binomial"
+)
+
+success_by_dis %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or_glm(model_data, success_by_dis) %>%
+  kable(digits = 2) %>%
+  kable_styling()
+
+# Adjusted
+success_by_dis_adj <- glm(
+  data = model_data,
+  formula = as.formula("div_sup_granted ~ discipline_psych + " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+success_by_dis_adj %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or_glm(model_data, success_by_dis_adj, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+)) %>%
+  kable(digits = 2) %>%
+  kable_styling()
+```
+
+## Barriers by Discipline
+
+```{r}
+barrier_summary_data <- clean_data %>%
+  count(discipline_psych, top_barrier) %>%
+  drop_na() %>%
+  group_by(discipline_psych) %>%
+  mutate(
+    discipline_psych = case_match(
+      discipline_psych,
+      FALSE ~ "non",
+      TRUE ~ "psych"
+    ),
+    prop = n / sum(n),
+    lower = prop_ci(n, sum(n), "lower"),
+    upper = prop_ci(n, sum(n), "upper")
+  ) %>%
+  ungroup()
+
+barrier_summary_data %>%
+  mutate(
+    across(
+      c(prop, lower, upper),
+      ~ percent(., .1)
+    )
+  ) %>%
+  pivot_wider(
+    names_from = "discipline_psych",
+    values_from = c("n", "prop", "lower", "upper")
+  ) %>%
+  select(top_barrier, n_psych, prop_psych, lower_psych, upper_psych, n_non, prop_non, lower_non, upper_non) %>%
+  kable() %>%
+  kable_styling()
+
+barriers_with_sufficient_n <- barrier_summary_data %>%
+  filter(n >= 5) %>%
+  count(top_barrier) %>%
+  filter(n == 2) %>%
+  pull(top_barrier)
+
+for(x in barriers_with_sufficient_n) {
+  
+  print("<br>")
+  
+  print(x)
+  
+  chisq.test(clean_data$discipline_psych, clean_data$top_barrier == x) %>%
+    print_chisq()
+
+}
+```
+
+## Psychologist-Specific Analyses
+
+```{r}
+model_data_psych <- model_data %>%
+  filter(discipline_psych)
+```
+
+### Uptake by Researcher Characteristics
+
+```{r, results = "asis"}
+# Bivariate models
+for(x in researcher_characteristics) {
+  
+  model <- glm(
+    data = model_data_psych,
+    formula = as.formula("div_sup_applied ~ " %+% x),
+    family = "binomial"
+  )
+  
+  # model %>%
+  #   summary() %>%
+  #   coef() %>%
+  #   kable() %>%
+  #   kable_styling() %>%
+  #   print()
+  
+  or <- or_glm(model_data_psych, model, incr = list(
+    age = 10,
+    research_time = 10,
+    research_funding = 10,
+    years_experience = 10
+  ))
+  
+  or %>%
+    kable(digits = 2) %>%
+    kable_styling() %>%
+    print()
+  
+}
+```
+
+```{r}
+# Combined model
+combined_model <- glm(
+  data = model_data_psych,
+  formula = as.formula("div_sup_applied ~ " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+combined_model %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or <- or_glm(model_data_psych, combined_model, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+))
+  
+or %>%
+  kable(digits = 2) %>%
+  kable_styling()
+```
+
+### Success by Researcher Characteristics
+
+```{r, results = "asis"}
+# Collapse race categories again, as these n's get very small!
+researcher_characteristics[3] <- '(race_ethnicity_recoded != "White non-Hispanic")'
+
+# Bivariate models
+for(x in researcher_characteristics) {
+  
+  model <- glm(
+    data = model_data_psych,
+    formula = as.formula("div_sup_granted ~ " %+% x),
+    family = "binomial"
+  )
+  
+  # model %>%
+  #   summary() %>%
+  #   coef() %>%
+  #   kable() %>%
+  #   kable_styling() %>%
+  #   print()
+
+  or <- or_glm(model_data_psych, model, incr = list(
+    age = 10,
+    research_time = 10,
+    research_funding = 10,
+    years_experience = 10
+  ))
+  
+  or %>%
+    kable(digits = 2) %>%
+    kable_styling() %>%
+    print()
+  
+}
+```
+
+```{r}
+# Combined model
+combined_model <- glm(
+  data = model_data_psych,
+  formula = as.formula("div_sup_granted ~ " %+% paste0(researcher_characteristics, collapse = " + ")),
+  family = "binomial"
+)
+
+combined_model %>%
+  summary() %>%
+  coef() %>%
+  kable() %>%
+  kable_styling()
+
+or <- or_glm(model_data_psych, combined_model, incr = list(
+  age = 10,
+  research_time = 10,
+  research_funding = 10,
+  years_experience = 10
+))
+  
+or %>%
+  kable(digits = 2) %>%
+  kable_styling()
+```
+
+### Barrier Plot
+
+```{r}
+barrier_summary_data %>%
+  filter(discipline_psych == "psych") %>%
+  ggplot(aes(fct_reorder(top_barrier, prop), prop)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = .5) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = NULL, labels = percent) +
+  coord_flip() +
+  theme_classic() +
+  ggtitle("Highest Cited Barriers Among Psychologists", "Means and 95% CIs")
+```
