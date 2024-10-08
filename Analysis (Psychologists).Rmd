@@ -185,93 +185,17 @@ n_pct("div_sup_granted")
 
 ## Cross-Discipline Comparisons
 
-### Uptake by Discipline
+### Uptake and Success by Discipline
 
 ```{r}
-# Bivariate
-uptake_by_dis <- glm(
-  data = model_data,
-  formula = div_sup_applied ~ discipline_psych,
-  family = "binomial"
-)
+chisq.test(clean_data$discipline_psych, clean_data$div_sup_applied) %>%
+    print_chisq()
 
-uptake_by_dis %>%
-  summary() %>%
-  coef() %>%
-  kable() %>%
-  kable_styling()
-
-or_glm(model_data, uptake_by_dis) %>%
-  kable(digits = 2) %>%
-  kable_styling()
-
-# Adjusted
-uptake_by_dis_adj <- glm(
-  data = model_data,
-  formula = as.formula("div_sup_applied ~ discipline_psych + " %+% paste0(researcher_characteristics, collapse = " + ")),
-  family = "binomial"
-)
-
-uptake_by_dis_adj %>%
-  summary() %>%
-  coef() %>%
-  kable() %>%
-  kable_styling()
-
-or_glm(model_data, uptake_by_dis_adj, incr = list(
-  age = 10,
-  research_time = 10,
-  research_funding = 10,
-  years_experience = 10
-)) %>%
-  kable(digits = 2) %>%
-  kable_styling()
+chisq.test(clean_data$discipline_psych, clean_data$div_sup_granted) %>%
+    print_chisq()
 ```
 
-### Success by Discipline
-
-```{r}
-# Bivariate
-success_by_dis <- glm(
-  data = model_data,
-  formula = div_sup_granted ~ discipline_psych,
-  family = "binomial"
-)
-
-success_by_dis %>%
-  summary() %>%
-  coef() %>%
-  kable() %>%
-  kable_styling()
-
-or_glm(model_data, success_by_dis) %>%
-  kable(digits = 2) %>%
-  kable_styling()
-
-# Adjusted
-success_by_dis_adj <- glm(
-  data = model_data,
-  formula = as.formula("div_sup_granted ~ discipline_psych + " %+% paste0(researcher_characteristics, collapse = " + ")),
-  family = "binomial"
-)
-
-success_by_dis_adj %>%
-  summary() %>%
-  coef() %>%
-  kable() %>%
-  kable_styling()
-
-or_glm(model_data, success_by_dis_adj, incr = list(
-  age = 10,
-  research_time = 10,
-  research_funding = 10,
-  years_experience = 10
-)) %>%
-  kable(digits = 2) %>%
-  kable_styling()
-```
-
-## Barriers by Discipline
+### Barriers by Discipline
 
 ```{r}
 barrier_summary_data <- clean_data %>%
