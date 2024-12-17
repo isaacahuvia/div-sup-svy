@@ -23,7 +23,7 @@ clean_data <- readRDS(here("Data", "Clean Data.rds"))
 researcher_characteristics <- c(
   "age",
   "gender_factor",
-  "race_ethnicity_factor",
+  "race_ethnicity_recoded",
   "discipline_factor",
   "institution_type",
   "job_title",
