@@ -317,9 +317,6 @@ or %>%
 ### Success by Researcher Characteristics
 
 ```{r, results = "asis"}
-# Collapse race categories again, as these n's get very small!
-researcher_characteristics[3] <- '(race_ethnicity_recoded != "White non-Hispanic")'
-
 # Bivariate models
 for(x in researcher_characteristics) {
   
