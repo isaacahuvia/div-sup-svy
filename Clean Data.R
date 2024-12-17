@@ -138,7 +138,7 @@ clean_data <- raw_data %>%
       Race == "Native Hawaiian or Other Pacific Islander" ~ "NH/PI non-Hispanic",
       Race == "White" ~ "White non-Hispanic",
       Race == "Other (please specify)" ~ "Other non-Hispanic",
-      !is.na(Race) | Race == "Prefer not to say" ~ NA_character_,
+      is.na(Race) | Race == "Prefer not to say" ~ NA_character_,
       T ~ "Multiple non-Hispanic"
     ),
     
