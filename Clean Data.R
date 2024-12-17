@@ -272,3 +272,4 @@ attr(clean_data, "column_map") <- NULL
 
 ## Save data
 saveRDS(clean_data, here("Data", "Clean Data.rds"))
+write.csv(clean_data, here("Data", "Clean Data.csv"), row.names = F)
