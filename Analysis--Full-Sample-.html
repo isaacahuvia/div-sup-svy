@@ -11,7 +11,7 @@
 
 
 
-<title>DivSup: Full-Sample Analyses for JAMA Letter</title>
+<title>DivSup: Full-Sample Analyses</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -572,14 +572,14 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">DivSup: Full-Sample Analyses for JAMA
-Letter</h1>
+<h1 class="title toc-ignore">DivSup: Full-Sample Analyses</h1>
 
 </div>
 
 
 <div id="descriptive-statistics" class="section level2">
 <h2>Descriptive Statistics</h2>
+<p>Means and standard deviations for continuous variables.</p>
 <pre class="r"><code>mean_sd(&quot;age&quot;)</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -672,6 +672,11 @@ sd
 </tr>
 </tbody>
 </table>
+<p>Counts and percents for categorical variables, excluding missing
+values. Because not all participants responded to all questions, the
+overall N’s will be different for some of these tables. Also note that
+some variables are recoded for analysis (more on that below, as it comes
+up).</p>
 <pre class="r"><code>n_pct(&quot;gender&quot;)</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -696,7 +701,7 @@ Man
 1191
 </td>
 <td style="text-align:left;">
-31.5%
+40.3%
 </td>
 </tr>
 <tr>
@@ -707,7 +712,7 @@ TGD
 15
 </td>
 <td style="text-align:left;">
-0.4%
+0.5%
 </td>
 </tr>
 <tr>
@@ -718,18 +723,7 @@ Woman
 1747
 </td>
 <td style="text-align:left;">
-46.2%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-827
-</td>
-<td style="text-align:left;">
-21.9%
+59.2%
 </td>
 </tr>
 </tbody>
@@ -769,7 +763,7 @@ Asian non-Hispanic
 281
 </td>
 <td style="text-align:left;">
-7.4%
+9.6%
 </td>
 </tr>
 <tr>
@@ -780,7 +774,7 @@ Black non-Hispanic
 92
 </td>
 <td style="text-align:left;">
-2.4%
+3.1%
 </td>
 </tr>
 <tr>
@@ -791,7 +785,7 @@ Hispanic
 224
 </td>
 <td style="text-align:left;">
-5.9%
+7.6%
 </td>
 </tr>
 <tr>
@@ -802,7 +796,7 @@ Multiple non-Hispanic
 67
 </td>
 <td style="text-align:left;">
-1.8%
+2.3%
 </td>
 </tr>
 <tr>
@@ -824,7 +818,7 @@ Other non-Hispanic
 70
 </td>
 <td style="text-align:left;">
-1.9%
+2.4%
 </td>
 </tr>
 <tr>
@@ -835,18 +829,7 @@ White non-Hispanic
 2187
 </td>
 <td style="text-align:left;">
-57.9%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-851
-</td>
-<td style="text-align:left;">
-22.5%
+74.7%
 </td>
 </tr>
 </tbody>
@@ -875,7 +858,7 @@ Behavioral Health
 319
 </td>
 <td style="text-align:left;">
-8.4%
+8.5%
 </td>
 </tr>
 <tr>
@@ -886,7 +869,7 @@ Biology
 1139
 </td>
 <td style="text-align:left;">
-30.1%
+30.3%
 </td>
 </tr>
 <tr>
@@ -941,7 +924,7 @@ Neuroscience
 587
 </td>
 <td style="text-align:left;">
-15.5%
+15.6%
 </td>
 </tr>
 <tr>
@@ -952,7 +935,7 @@ Other (please specify)
 706
 </td>
 <td style="text-align:left;">
-18.7%
+18.8%
 </td>
 </tr>
 <tr>
@@ -999,17 +982,6 @@ Virology
 2.1%
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:left;">
-0.5%
-</td>
-</tr>
 </tbody>
 </table>
 <pre class="r"><code>n_pct(&quot;institution_type&quot;)</code></pre>
@@ -1036,7 +1008,7 @@ Academic Medical Center
 1408
 </td>
 <td style="text-align:left;">
-37.2%
+47.3%
 </td>
 </tr>
 <tr>
@@ -1047,7 +1019,7 @@ Nonprofit Research/Funding Agency (e.g., AFSP)
 37
 </td>
 <td style="text-align:left;">
-1.0%
+1.2%
 </td>
 </tr>
 <tr>
@@ -1058,7 +1030,7 @@ Other (please specify)
 200
 </td>
 <td style="text-align:left;">
-5.3%
+6.7%
 </td>
 </tr>
 <tr>
@@ -1069,7 +1041,7 @@ Private Research Institution (e.g., RAND)
 72
 </td>
 <td style="text-align:left;">
-1.9%
+2.4%
 </td>
 </tr>
 <tr>
@@ -1080,7 +1052,7 @@ Small College
 41
 </td>
 <td style="text-align:left;">
-1.1%
+1.4%
 </td>
 </tr>
 <tr>
@@ -1091,18 +1063,7 @@ University/psychology department
 1219
 </td>
 <td style="text-align:left;">
-32.2%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-803
-</td>
-<td style="text-align:left;">
-21.2%
+40.9%
 </td>
 </tr>
 </tbody>
@@ -1131,7 +1092,7 @@ Assistant Professor
 579
 </td>
 <td style="text-align:left;">
-15.3%
+19.4%
 </td>
 </tr>
 <tr>
@@ -1142,7 +1103,7 @@ Associate Professor
 834
 </td>
 <td style="text-align:left;">
-22.1%
+28.0%
 </td>
 </tr>
 <tr>
@@ -1153,7 +1114,7 @@ Full Professor
 1267
 </td>
 <td style="text-align:left;">
-33.5%
+42.5%
 </td>
 </tr>
 <tr>
@@ -1164,7 +1125,7 @@ Other (please specify)
 221
 </td>
 <td style="text-align:left;">
-5.8%
+7.4%
 </td>
 </tr>
 <tr>
@@ -1175,7 +1136,7 @@ Project Scientist
 52
 </td>
 <td style="text-align:left;">
-1.4%
+1.7%
 </td>
 </tr>
 <tr>
@@ -1186,18 +1147,7 @@ Research Psychologist
 25
 </td>
 <td style="text-align:left;">
-0.7%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-802
-</td>
-<td style="text-align:left;">
-21.2%
+0.8%
 </td>
 </tr>
 </tbody>
@@ -1226,7 +1176,7 @@ FALSE
 1646
 </td>
 <td style="text-align:left;">
-43.5%
+44.6%
 </td>
 </tr>
 <tr>
@@ -1237,18 +1187,7 @@ TRUE
 2043
 </td>
 <td style="text-align:left;">
-54.0%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+55.4%
 </td>
 </tr>
 </tbody>
@@ -1277,7 +1216,7 @@ FALSE
 2622
 </td>
 <td style="text-align:left;">
-69.4%
+71.1%
 </td>
 </tr>
 <tr>
@@ -1288,18 +1227,7 @@ TRUE
 1067
 </td>
 <td style="text-align:left;">
-28.2%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+28.9%
 </td>
 </tr>
 </tbody>
@@ -1328,7 +1256,7 @@ FALSE
 2318
 </td>
 <td style="text-align:left;">
-61.3%
+62.8%
 </td>
 </tr>
 <tr>
@@ -1339,18 +1267,7 @@ TRUE
 1371
 </td>
 <td style="text-align:left;">
-36.3%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+37.2%
 </td>
 </tr>
 </tbody>
@@ -1379,7 +1296,7 @@ FALSE
 1138
 </td>
 <td style="text-align:left;">
-30.1%
+30.8%
 </td>
 </tr>
 <tr>
@@ -1390,18 +1307,7 @@ TRUE
 2551
 </td>
 <td style="text-align:left;">
-67.5%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+69.2%
 </td>
 </tr>
 </tbody>
@@ -1430,7 +1336,7 @@ FALSE
 1486
 </td>
 <td style="text-align:left;">
-39.3%
+40.3%
 </td>
 </tr>
 <tr>
@@ -1441,18 +1347,7 @@ TRUE
 2203
 </td>
 <td style="text-align:left;">
-58.3%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+59.7%
 </td>
 </tr>
 </tbody>
@@ -1481,7 +1376,7 @@ FALSE
 2148
 </td>
 <td style="text-align:left;">
-56.8%
+58.2%
 </td>
 </tr>
 <tr>
@@ -1492,18 +1387,7 @@ TRUE
 1541
 </td>
 <td style="text-align:left;">
-40.8%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:left;">
-2.4%
+41.8%
 </td>
 </tr>
 </tbody>
@@ -1572,7 +1456,7 @@ FALSE
 249
 </td>
 <td style="text-align:left;">
-6.6%
+15.4%
 </td>
 </tr>
 <tr>
@@ -1583,25 +1467,19 @@ TRUE
 1365
 </td>
 <td style="text-align:left;">
-36.1%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-2166
-</td>
-<td style="text-align:left;">
-57.3%
+84.6%
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="uptake-by-researcher-characteristics" class="section level2">
-<h2>Uptake by Researcher Characteristics</h2>
+<div id="application-by-researcher-characteristics" class="section level2">
+<h2>Application by Researcher Characteristics</h2>
+<p>These first tables show the <em>bivariate models</em> - i.e., models
+that look at each IV in isolation, without controlling for other IVs.
+For models predicting application, race/ethnicity was recoded such that
+the categories AI/AN, NH/PI, multiple, and other were collapsed into
+“other”.</p>
 <pre class="r"><code># Bivariate models
 for(x in researcher_characteristics) {
   
@@ -2604,6 +2482,7 @@ Indicator variable
 </tr>
 </tbody>
 </table>
+<p>This table includes results for the combined model.</p>
 <pre class="r"><code># Combined model
 combined_model &lt;- glm(
   data = clean_data,
@@ -2611,680 +2490,13 @@ combined_model &lt;- glm(
   family = &quot;binomial&quot;
 )
 
-combined_model %&gt;%
+p_values &lt;- combined_model %&gt;%
   summary() %&gt;%
   coef() %&gt;%
-  kable() %&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Estimate
-</th>
-<th style="text-align:right;">
-Std. Error
-</th>
-<th style="text-align:right;">
-z value
-</th>
-<th style="text-align:right;">
-Pr(&gt;|z|)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
--1.7610338
-</td>
-<td style="text-align:right;">
-0.4122831
-</td>
-<td style="text-align:right;">
--4.2714184
-</td>
-<td style="text-align:right;">
-0.0000194
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-age
-</td>
-<td style="text-align:right;">
--0.0006105
-</td>
-<td style="text-align:right;">
-0.0079869
-</td>
-<td style="text-align:right;">
--0.0764315
-</td>
-<td style="text-align:right;">
-0.9390758
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-gender_factorMan
-</td>
-<td style="text-align:right;">
-0.1498377
-</td>
-<td style="text-align:right;">
-0.0963990
-</td>
-<td style="text-align:right;">
-1.5543502
-</td>
-<td style="text-align:right;">
-0.1201009
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-gender_factorTGD
-</td>
-<td style="text-align:right;">
--0.4434107
-</td>
-<td style="text-align:right;">
-0.6261751
-</td>
-<td style="text-align:right;">
--0.7081257
-</td>
-<td style="text-align:right;">
-0.4788672
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedAsian non-Hispanic
-</td>
-<td style="text-align:right;">
--0.0357939
-</td>
-<td style="text-align:right;">
-0.1602276
-</td>
-<td style="text-align:right;">
--0.2233944
-</td>
-<td style="text-align:right;">
-0.8232286
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedBlack non-Hispanic
-</td>
-<td style="text-align:right;">
-0.7436565
-</td>
-<td style="text-align:right;">
-0.2508723
-</td>
-<td style="text-align:right;">
-2.9642831
-</td>
-<td style="text-align:right;">
-0.0030339
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedHispanic
-</td>
-<td style="text-align:right;">
-0.5520772
-</td>
-<td style="text-align:right;">
-0.1747112
-</td>
-<td style="text-align:right;">
-3.1599415
-</td>
-<td style="text-align:right;">
-0.0015780
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedOther non-Hispanic
-</td>
-<td style="text-align:right;">
-0.3516524
-</td>
-<td style="text-align:right;">
-0.2080299
-</td>
-<td style="text-align:right;">
-1.6903932
-</td>
-<td style="text-align:right;">
-0.0909528
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorBehavioral Health
-</td>
-<td style="text-align:right;">
--0.6445293
-</td>
-<td style="text-align:right;">
-0.1845064
-</td>
-<td style="text-align:right;">
--3.4932628
-</td>
-<td style="text-align:right;">
-0.0004772
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorChemistry
-</td>
-<td style="text-align:right;">
--0.2170525
-</td>
-<td style="text-align:right;">
-0.2764563
-</td>
-<td style="text-align:right;">
--0.7851240
-</td>
-<td style="text-align:right;">
-0.4323809
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorClinical Psychology
-</td>
-<td style="text-align:right;">
--0.2185090
-</td>
-<td style="text-align:right;">
-0.1911558
-</td>
-<td style="text-align:right;">
--1.1430940
-</td>
-<td style="text-align:right;">
-0.2529995
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorCognitive Psychology
-</td>
-<td style="text-align:right;">
--0.4696335
-</td>
-<td style="text-align:right;">
-0.3604431
-</td>
-<td style="text-align:right;">
--1.3029338
-</td>
-<td style="text-align:right;">
-0.1925974
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorEpidemiology
-</td>
-<td style="text-align:right;">
--0.3974377
-</td>
-<td style="text-align:right;">
-0.1872460
-</td>
-<td style="text-align:right;">
--2.1225433
-</td>
-<td style="text-align:right;">
-0.0337921
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorNeuroscience
-</td>
-<td style="text-align:right;">
--0.1491534
-</td>
-<td style="text-align:right;">
-0.1422308
-</td>
-<td style="text-align:right;">
--1.0486717
-</td>
-<td style="text-align:right;">
-0.2943293
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorOther (please specify)
-</td>
-<td style="text-align:right;">
--0.3494566
-</td>
-<td style="text-align:right;">
-0.1365011
-</td>
-<td style="text-align:right;">
--2.5601008
-</td>
-<td style="text-align:right;">
-0.0104642
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorPharmacology
-</td>
-<td style="text-align:right;">
--0.5855925
-</td>
-<td style="text-align:right;">
-0.3093542
-</td>
-<td style="text-align:right;">
--1.8929514
-</td>
-<td style="text-align:right;">
-0.0583643
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorPsychiatry
-</td>
-<td style="text-align:right;">
--0.0161550
-</td>
-<td style="text-align:right;">
-0.4085280
-</td>
-<td style="text-align:right;">
--0.0395445
-</td>
-<td style="text-align:right;">
-0.9684563
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorSocial Psychology
-</td>
-<td style="text-align:right;">
--0.1687804
-</td>
-<td style="text-align:right;">
-0.4904656
-</td>
-<td style="text-align:right;">
--0.3441227
-</td>
-<td style="text-align:right;">
-0.7307540
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorVirology
-</td>
-<td style="text-align:right;">
--0.5773946
-</td>
-<td style="text-align:right;">
-0.3561898
-</td>
-<td style="text-align:right;">
--1.6210306
-</td>
-<td style="text-align:right;">
-0.1050111
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeNonprofit Research/Funding Agency (e.g., AFSP)
-</td>
-<td style="text-align:right;">
-0.2664408
-</td>
-<td style="text-align:right;">
-0.4315647
-</td>
-<td style="text-align:right;">
-0.6173833
-</td>
-<td style="text-align:right;">
-0.5369820
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeOther (please specify)
-</td>
-<td style="text-align:right;">
-0.1480778
-</td>
-<td style="text-align:right;">
-0.1970107
-</td>
-<td style="text-align:right;">
-0.7516231
-</td>
-<td style="text-align:right;">
-0.4522777
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typePrivate Research Institution (e.g., RAND)
-</td>
-<td style="text-align:right;">
--0.1180585
-</td>
-<td style="text-align:right;">
-0.3499658
-</td>
-<td style="text-align:right;">
--0.3373429
-</td>
-<td style="text-align:right;">
-0.7358584
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeSmall College
-</td>
-<td style="text-align:right;">
--0.4309692
-</td>
-<td style="text-align:right;">
-0.4692386
-</td>
-<td style="text-align:right;">
--0.9184436
-</td>
-<td style="text-align:right;">
-0.3583867
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeUniversity/psychology department
-</td>
-<td style="text-align:right;">
-0.1957826
-</td>
-<td style="text-align:right;">
-0.1089089
-</td>
-<td style="text-align:right;">
-1.7976732
-</td>
-<td style="text-align:right;">
-0.0722288
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleAssociate Professor
-</td>
-<td style="text-align:right;">
-0.3201032
-</td>
-<td style="text-align:right;">
-0.1412189
-</td>
-<td style="text-align:right;">
-2.2667158
-</td>
-<td style="text-align:right;">
-0.0234076
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleFull Professor
-</td>
-<td style="text-align:right;">
-0.8240119
-</td>
-<td style="text-align:right;">
-0.1661185
-</td>
-<td style="text-align:right;">
-4.9603850
-</td>
-<td style="text-align:right;">
-0.0000007
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleOther (please specify)
-</td>
-<td style="text-align:right;">
-0.0997966
-</td>
-<td style="text-align:right;">
-0.2183373
-</td>
-<td style="text-align:right;">
-0.4570754
-</td>
-<td style="text-align:right;">
-0.6476168
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleProject Scientist
-</td>
-<td style="text-align:right;">
--0.3802507
-</td>
-<td style="text-align:right;">
-0.4028661
-</td>
-<td style="text-align:right;">
--0.9438636
-</td>
-<td style="text-align:right;">
-0.3452394
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleResearch Psychologist
-</td>
-<td style="text-align:right;">
--0.0371517
-</td>
-<td style="text-align:right;">
-0.6112995
-</td>
-<td style="text-align:right;">
--0.0607749
-</td>
-<td style="text-align:right;">
-0.9515385
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-research_time
-</td>
-<td style="text-align:right;">
-0.0052546
-</td>
-<td style="text-align:right;">
-0.0032498
-</td>
-<td style="text-align:right;">
-1.6168903
-</td>
-<td style="text-align:right;">
-0.1059020
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-research_funding
-</td>
-<td style="text-align:right;">
--0.0006632
-</td>
-<td style="text-align:right;">
-0.0023278
-</td>
-<td style="text-align:right;">
--0.2848959
-</td>
-<td style="text-align:right;">
-0.7757239
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-years_experience
-</td>
-<td style="text-align:right;">
-0.0339661
-</td>
-<td style="text-align:right;">
-0.0080224
-</td>
-<td style="text-align:right;">
-4.2339095
-</td>
-<td style="text-align:right;">
-0.0000230
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_undergradTRUE
-</td>
-<td style="text-align:right;">
--0.4135327
-</td>
-<td style="text-align:right;">
-0.1088413
-</td>
-<td style="text-align:right;">
--3.7994089
-</td>
-<td style="text-align:right;">
-0.0001450
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_postbacTRUE
-</td>
-<td style="text-align:right;">
-0.3418922
-</td>
-<td style="text-align:right;">
-0.1092743
-</td>
-<td style="text-align:right;">
-3.1287535
-</td>
-<td style="text-align:right;">
-0.0017555
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_mastersTRUE
-</td>
-<td style="text-align:right;">
--0.0358631
-</td>
-<td style="text-align:right;">
-0.1028057
-</td>
-<td style="text-align:right;">
--0.3488434
-</td>
-<td style="text-align:right;">
-0.7272068
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_doctoralTRUE
-</td>
-<td style="text-align:right;">
-0.3152916
-</td>
-<td style="text-align:right;">
-0.1134036
-</td>
-<td style="text-align:right;">
-2.7802612
-</td>
-<td style="text-align:right;">
-0.0054315
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_postdocTRUE
-</td>
-<td style="text-align:right;">
-0.0126663
-</td>
-<td style="text-align:right;">
-0.1033377
-</td>
-<td style="text-align:right;">
-0.1225718
-</td>
-<td style="text-align:right;">
-0.9024462
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_ecrTRUE
-</td>
-<td style="text-align:right;">
-0.0302730
-</td>
-<td style="text-align:right;">
-0.1013408
-</td>
-<td style="text-align:right;">
-0.2987247
-</td>
-<td style="text-align:right;">
-0.7651501
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>or &lt;- or_glm(clean_data, combined_model, incr = list(
+  as_tibble(rownames = &quot;predictor&quot;) %&gt;%
+  select(predictor, p = `Pr(&gt;|z|)`)
+
+or &lt;- or_glm(clean_data, combined_model, incr = list(
   age = 10,
   research_time = 10,
   research_funding = 10,
@@ -3292,6 +2504,7 @@ mentor_ecrTRUE
 ))
   
 or %&gt;%
+  left_join(p_values, by = &quot;predictor&quot;, relationship = &quot;one-to-one&quot;) %&gt;%
   kable() %&gt;%
   kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -3312,6 +2525,9 @@ ci_high (97.5)
 <th style="text-align:left;">
 increment
 </th>
+<th style="text-align:right;">
+p
+</th>
 </tr>
 </thead>
 <tbody>
@@ -3331,6 +2547,9 @@ age
 <td style="text-align:left;">
 10
 </td>
+<td style="text-align:right;">
+0.9390758
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3347,6 +2566,9 @@ gender_factorMan
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.1201009
 </td>
 </tr>
 <tr>
@@ -3365,6 +2587,9 @@ gender_factorTGD
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.4788672
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3381,6 +2606,9 @@ race_ethnicity_recodedAsian non-Hispanic
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.8232286
 </td>
 </tr>
 <tr>
@@ -3399,6 +2627,9 @@ race_ethnicity_recodedBlack non-Hispanic
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0030339
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3415,6 +2646,9 @@ race_ethnicity_recodedHispanic
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0015780
 </td>
 </tr>
 <tr>
@@ -3433,6 +2667,9 @@ race_ethnicity_recodedOther non-Hispanic
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0909528
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3449,6 +2686,9 @@ discipline_factorBehavioral Health
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0004772
 </td>
 </tr>
 <tr>
@@ -3467,6 +2707,9 @@ discipline_factorChemistry
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.4323809
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3483,6 +2726,9 @@ discipline_factorClinical Psychology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.2529995
 </td>
 </tr>
 <tr>
@@ -3501,6 +2747,9 @@ discipline_factorCognitive Psychology
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.1925974
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3517,6 +2766,9 @@ discipline_factorEpidemiology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0337921
 </td>
 </tr>
 <tr>
@@ -3535,6 +2787,9 @@ discipline_factorNeuroscience
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.2943293
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3551,6 +2806,9 @@ discipline_factorOther (please specify)
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0104642
 </td>
 </tr>
 <tr>
@@ -3569,6 +2827,9 @@ discipline_factorPharmacology
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0583643
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3585,6 +2846,9 @@ discipline_factorPsychiatry
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.9684563
 </td>
 </tr>
 <tr>
@@ -3603,6 +2867,9 @@ discipline_factorSocial Psychology
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.7307540
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3619,6 +2886,9 @@ discipline_factorVirology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.1050111
 </td>
 </tr>
 <tr>
@@ -3637,6 +2907,9 @@ institution_typeNonprofit Research/Funding Agency (e.g., AFSP)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.5369820
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3653,6 +2926,9 @@ institution_typeOther (please specify)
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.4522777
 </td>
 </tr>
 <tr>
@@ -3671,6 +2947,9 @@ institution_typePrivate Research Institution (e.g., RAND)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.7358584
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3687,6 +2966,9 @@ institution_typeSmall College
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.3583867
 </td>
 </tr>
 <tr>
@@ -3705,6 +2987,9 @@ institution_typeUniversity/psychology department
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0722288
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3721,6 +3006,9 @@ job_titleAssociate Professor
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0234076
 </td>
 </tr>
 <tr>
@@ -3739,6 +3027,9 @@ job_titleFull Professor
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0000007
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3755,6 +3046,9 @@ job_titleOther (please specify)
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.6476168
 </td>
 </tr>
 <tr>
@@ -3773,6 +3067,9 @@ job_titleProject Scientist
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.3452394
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3789,6 +3086,9 @@ job_titleResearch Psychologist
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.9515385
 </td>
 </tr>
 <tr>
@@ -3807,6 +3107,9 @@ research_time
 <td style="text-align:left;">
 10
 </td>
+<td style="text-align:right;">
+0.1059020
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3823,6 +3126,9 @@ research_funding
 </td>
 <td style="text-align:left;">
 10
+</td>
+<td style="text-align:right;">
+0.7757239
 </td>
 </tr>
 <tr>
@@ -3841,6 +3147,9 @@ years_experience
 <td style="text-align:left;">
 10
 </td>
+<td style="text-align:right;">
+0.0000230
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3857,6 +3166,9 @@ mentor_undergradTRUE
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0001450
 </td>
 </tr>
 <tr>
@@ -3875,6 +3187,9 @@ mentor_postbacTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0017555
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3891,6 +3206,9 @@ mentor_mastersTRUE
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.7272068
 </td>
 </tr>
 <tr>
@@ -3909,6 +3227,9 @@ mentor_doctoralTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0054315
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3925,6 +3246,9 @@ mentor_postdocTRUE
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.9024462
 </td>
 </tr>
 <tr>
@@ -3943,13 +3267,25 @@ mentor_ecrTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.7651501
+</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="success-by-researcher-characteristics" class="section level2">
 <h2>Success by Researcher Characteristics</h2>
+<p>Same as above - this section is the bivariate models. Because the
+sample size for these analyses is smaller (limited to only respondents
+who applied for a DS), some new categorical variables had to be recoded
+(to prevent categories whose n’s were too small to model). In addition
+to recoding race (as above), gender was recoded to make TGD (n = 4) NA
+(i.e., drop these respondents), discipline was recoded to make social
+psychology (n = 11) NA, and institution was recoded to make small
+college (n = 10) NA.</p>
 <pre class="r"><code>data_success &lt;- clean_data %&gt;%
+  drop_na(div_sup_granted) %&gt;%
   mutate(
     gender_factor = na_if(gender_factor, &quot;TGD&quot;),
     discipline_factor = na_if(discipline_factor, &quot;Social Psychology&quot;),
@@ -4907,6 +4243,7 @@ Indicator variable
 </tr>
 </tbody>
 </table>
+<p>And the combined model:</p>
 <pre class="r"><code># Combined model
 combined_model &lt;- glm(
   data = data_success,
@@ -4914,629 +4251,13 @@ combined_model &lt;- glm(
   family = &quot;binomial&quot;
 )
 
-combined_model %&gt;%
+p_values &lt;- combined_model %&gt;%
   summary() %&gt;%
   coef() %&gt;%
-  kable() %&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Estimate
-</th>
-<th style="text-align:right;">
-Std. Error
-</th>
-<th style="text-align:right;">
-z value
-</th>
-<th style="text-align:right;">
-Pr(&gt;|z|)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-1.7360024
-</td>
-<td style="text-align:right;">
-0.9132018
-</td>
-<td style="text-align:right;">
-1.9010063
-</td>
-<td style="text-align:right;">
-0.0573012
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-age
-</td>
-<td style="text-align:right;">
--0.0007989
-</td>
-<td style="text-align:right;">
-0.0176927
-</td>
-<td style="text-align:right;">
--0.0451553
-</td>
-<td style="text-align:right;">
-0.9639835
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-gender_factorMan
-</td>
-<td style="text-align:right;">
-0.1803808
-</td>
-<td style="text-align:right;">
-0.2048001
-</td>
-<td style="text-align:right;">
-0.8807652
-</td>
-<td style="text-align:right;">
-0.3784449
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedAsian non-Hispanic
-</td>
-<td style="text-align:right;">
--0.2716831
-</td>
-<td style="text-align:right;">
-0.3310627
-</td>
-<td style="text-align:right;">
--0.8206393
-</td>
-<td style="text-align:right;">
-0.4118518
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedBlack non-Hispanic
-</td>
-<td style="text-align:right;">
-0.0630712
-</td>
-<td style="text-align:right;">
-0.5233456
-</td>
-<td style="text-align:right;">
-0.1205153
-</td>
-<td style="text-align:right;">
-0.9040749
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedHispanic
-</td>
-<td style="text-align:right;">
-0.4870669
-</td>
-<td style="text-align:right;">
-0.3873589
-</td>
-<td style="text-align:right;">
-1.2574047
-</td>
-<td style="text-align:right;">
-0.2086071
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-race_ethnicity_recodedOther non-Hispanic
-</td>
-<td style="text-align:right;">
-0.3552561
-</td>
-<td style="text-align:right;">
-0.4738156
-</td>
-<td style="text-align:right;">
-0.7497772
-</td>
-<td style="text-align:right;">
-0.4533889
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorBehavioral Health
-</td>
-<td style="text-align:right;">
--0.1075583
-</td>
-<td style="text-align:right;">
-0.4055913
-</td>
-<td style="text-align:right;">
--0.2651889
-</td>
-<td style="text-align:right;">
-0.7908639
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorChemistry
-</td>
-<td style="text-align:right;">
--0.1063186
-</td>
-<td style="text-align:right;">
-0.5589554
-</td>
-<td style="text-align:right;">
--0.1902094
-</td>
-<td style="text-align:right;">
-0.8491451
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorClinical Psychology
-</td>
-<td style="text-align:right;">
-0.2127779
-</td>
-<td style="text-align:right;">
-0.4500599
-</td>
-<td style="text-align:right;">
-0.4727768
-</td>
-<td style="text-align:right;">
-0.6363724
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorCognitive Psychology
-</td>
-<td style="text-align:right;">
-0.9613685
-</td>
-<td style="text-align:right;">
-1.1053976
-</td>
-<td style="text-align:right;">
-0.8697038
-</td>
-<td style="text-align:right;">
-0.3844623
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorEpidemiology
-</td>
-<td style="text-align:right;">
-0.0642779
-</td>
-<td style="text-align:right;">
-0.4221069
-</td>
-<td style="text-align:right;">
-0.1522787
-</td>
-<td style="text-align:right;">
-0.8789671
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorNeuroscience
-</td>
-<td style="text-align:right;">
--0.5558645
-</td>
-<td style="text-align:right;">
-0.2838943
-</td>
-<td style="text-align:right;">
--1.9579982
-</td>
-<td style="text-align:right;">
-0.0502302
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorOther (please specify)
-</td>
-<td style="text-align:right;">
--0.0460124
-</td>
-<td style="text-align:right;">
-0.2975819
-</td>
-<td style="text-align:right;">
--0.1546211
-</td>
-<td style="text-align:right;">
-0.8771200
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorPharmacology
-</td>
-<td style="text-align:right;">
--0.5889117
-</td>
-<td style="text-align:right;">
-0.6114931
-</td>
-<td style="text-align:right;">
--0.9630717
-</td>
-<td style="text-align:right;">
-0.3355116
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorPsychiatry
-</td>
-<td style="text-align:right;">
--0.1372527
-</td>
-<td style="text-align:right;">
-0.8101310
-</td>
-<td style="text-align:right;">
--0.1694204
-</td>
-<td style="text-align:right;">
-0.8654660
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-discipline_factorVirology
-</td>
-<td style="text-align:right;">
--1.5235058
-</td>
-<td style="text-align:right;">
-0.5980323
-</td>
-<td style="text-align:right;">
--2.5475309
-</td>
-<td style="text-align:right;">
-0.0108488
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeNonprofit Research/Funding Agency (e.g., AFSP)
-</td>
-<td style="text-align:right;">
-0.7870870
-</td>
-<td style="text-align:right;">
-1.1454301
-</td>
-<td style="text-align:right;">
-0.6871542
-</td>
-<td style="text-align:right;">
-0.4919856
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeOther (please specify)
-</td>
-<td style="text-align:right;">
--0.1978647
-</td>
-<td style="text-align:right;">
-0.4062316
-</td>
-<td style="text-align:right;">
--0.4870736
-</td>
-<td style="text-align:right;">
-0.6262062
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typePrivate Research Institution (e.g., RAND)
-</td>
-<td style="text-align:right;">
--0.4045836
-</td>
-<td style="text-align:right;">
-0.7493313
-</td>
-<td style="text-align:right;">
--0.5399262
-</td>
-<td style="text-align:right;">
-0.5892479
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-institution_typeUniversity/psychology department
-</td>
-<td style="text-align:right;">
--0.1541215
-</td>
-<td style="text-align:right;">
-0.2316901
-</td>
-<td style="text-align:right;">
--0.6652053
-</td>
-<td style="text-align:right;">
-0.5059192
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleAssociate Professor
-</td>
-<td style="text-align:right;">
--0.1273582
-</td>
-<td style="text-align:right;">
-0.3397694
-</td>
-<td style="text-align:right;">
--0.3748373
-</td>
-<td style="text-align:right;">
-0.7077814
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleFull Professor
-</td>
-<td style="text-align:right;">
--0.3554990
-</td>
-<td style="text-align:right;">
-0.3802100
-</td>
-<td style="text-align:right;">
--0.9350071
-</td>
-<td style="text-align:right;">
-0.3497846
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleOther (please specify)
-</td>
-<td style="text-align:right;">
-0.0344634
-</td>
-<td style="text-align:right;">
-0.5569505
-</td>
-<td style="text-align:right;">
-0.0618787
-</td>
-<td style="text-align:right;">
-0.9506594
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleProject Scientist
-</td>
-<td style="text-align:right;">
--1.9089194
-</td>
-<td style="text-align:right;">
-0.8416493
-</td>
-<td style="text-align:right;">
--2.2680699
-</td>
-<td style="text-align:right;">
-0.0233249
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-job_titleResearch Psychologist
-</td>
-<td style="text-align:right;">
--1.6405743
-</td>
-<td style="text-align:right;">
-1.1743966
-</td>
-<td style="text-align:right;">
--1.3969509
-</td>
-<td style="text-align:right;">
-0.1624283
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-research_time
-</td>
-<td style="text-align:right;">
--0.0055396
-</td>
-<td style="text-align:right;">
-0.0070254
-</td>
-<td style="text-align:right;">
--0.7885106
-</td>
-<td style="text-align:right;">
-0.4303981
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-research_funding
-</td>
-<td style="text-align:right;">
-0.0060802
-</td>
-<td style="text-align:right;">
-0.0051015
-</td>
-<td style="text-align:right;">
-1.1918447
-</td>
-<td style="text-align:right;">
-0.2333221
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-years_experience
-</td>
-<td style="text-align:right;">
-0.0293815
-</td>
-<td style="text-align:right;">
-0.0168129
-</td>
-<td style="text-align:right;">
-1.7475541
-</td>
-<td style="text-align:right;">
-0.0805413
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_undergradTRUE
-</td>
-<td style="text-align:right;">
--0.6104169
-</td>
-<td style="text-align:right;">
-0.2411966
-</td>
-<td style="text-align:right;">
--2.5307859
-</td>
-<td style="text-align:right;">
-0.0113807
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_postbacTRUE
-</td>
-<td style="text-align:right;">
-0.3318932
-</td>
-<td style="text-align:right;">
-0.2296231
-</td>
-<td style="text-align:right;">
-1.4453820
-</td>
-<td style="text-align:right;">
-0.1483506
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_mastersTRUE
-</td>
-<td style="text-align:right;">
--0.3393946
-</td>
-<td style="text-align:right;">
-0.2159725
-</td>
-<td style="text-align:right;">
--1.5714710
-</td>
-<td style="text-align:right;">
-0.1160733
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_doctoralTRUE
-</td>
-<td style="text-align:right;">
-0.5835560
-</td>
-<td style="text-align:right;">
-0.2531055
-</td>
-<td style="text-align:right;">
-2.3055836
-</td>
-<td style="text-align:right;">
-0.0211339
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_postdocTRUE
-</td>
-<td style="text-align:right;">
-0.1778239
-</td>
-<td style="text-align:right;">
-0.2319330
-</td>
-<td style="text-align:right;">
-0.7667036
-</td>
-<td style="text-align:right;">
-0.4432577
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-mentor_ecrTRUE
-</td>
-<td style="text-align:right;">
--0.5388276
-</td>
-<td style="text-align:right;">
-0.2181232
-</td>
-<td style="text-align:right;">
--2.4702896
-</td>
-<td style="text-align:right;">
-0.0135004
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>or &lt;- or_glm(data_success, combined_model, incr = list(
+  as_tibble(rownames = &quot;predictor&quot;) %&gt;%
+  select(predictor, p = `Pr(&gt;|z|)`)
+
+or &lt;- or_glm(data_success, combined_model, incr = list(
   age = 10,
   research_time = 10,
   research_funding = 10,
@@ -5544,6 +4265,7 @@ mentor_ecrTRUE
 ))
   
 or %&gt;%
+  left_join(p_values, by = &quot;predictor&quot;, relationship = &quot;one-to-one&quot;) %&gt;%
   kable() %&gt;%
   kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -5564,6 +4286,9 @@ ci_high (97.5)
 <th style="text-align:left;">
 increment
 </th>
+<th style="text-align:right;">
+p
+</th>
 </tr>
 </thead>
 <tbody>
@@ -5583,6 +4308,9 @@ age
 <td style="text-align:left;">
 10
 </td>
+<td style="text-align:right;">
+0.9639835
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5599,6 +4327,9 @@ gender_factorMan
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.3784449
 </td>
 </tr>
 <tr>
@@ -5617,6 +4348,9 @@ race_ethnicity_recodedAsian non-Hispanic
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.4118518
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5633,6 +4367,9 @@ race_ethnicity_recodedBlack non-Hispanic
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.9040749
 </td>
 </tr>
 <tr>
@@ -5651,6 +4388,9 @@ race_ethnicity_recodedHispanic
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.2086071
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5667,6 +4407,9 @@ race_ethnicity_recodedOther non-Hispanic
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.4533889
 </td>
 </tr>
 <tr>
@@ -5685,6 +4428,9 @@ discipline_factorBehavioral Health
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.7908639
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5701,6 +4447,9 @@ discipline_factorChemistry
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.8491451
 </td>
 </tr>
 <tr>
@@ -5719,6 +4468,9 @@ discipline_factorClinical Psychology
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.6363724
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5735,6 +4487,9 @@ discipline_factorCognitive Psychology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.3844623
 </td>
 </tr>
 <tr>
@@ -5753,6 +4508,9 @@ discipline_factorEpidemiology
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.8789671
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5769,6 +4527,9 @@ discipline_factorNeuroscience
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0502302
 </td>
 </tr>
 <tr>
@@ -5787,6 +4548,9 @@ discipline_factorOther (please specify)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.8771200
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5803,6 +4567,9 @@ discipline_factorPharmacology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.3355116
 </td>
 </tr>
 <tr>
@@ -5821,6 +4588,9 @@ discipline_factorPsychiatry
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.8654660
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5837,6 +4607,9 @@ discipline_factorVirology
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0108488
 </td>
 </tr>
 <tr>
@@ -5855,6 +4628,9 @@ institution_typeNonprofit Research/Funding Agency (e.g., AFSP)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.4919856
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5871,6 +4647,9 @@ institution_typeOther (please specify)
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.6262062
 </td>
 </tr>
 <tr>
@@ -5889,6 +4668,9 @@ institution_typePrivate Research Institution (e.g., RAND)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.5892479
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5905,6 +4687,9 @@ institution_typeUniversity/psychology department
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.5059192
 </td>
 </tr>
 <tr>
@@ -5923,6 +4708,9 @@ job_titleAssociate Professor
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.7077814
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5939,6 +4727,9 @@ job_titleFull Professor
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.3497846
 </td>
 </tr>
 <tr>
@@ -5957,6 +4748,9 @@ job_titleOther (please specify)
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.9506594
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -5973,6 +4767,9 @@ job_titleProject Scientist
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0233249
 </td>
 </tr>
 <tr>
@@ -5991,6 +4788,9 @@ job_titleResearch Psychologist
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.1624283
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -6007,6 +4807,9 @@ research_time
 </td>
 <td style="text-align:left;">
 10
+</td>
+<td style="text-align:right;">
+0.4303981
 </td>
 </tr>
 <tr>
@@ -6025,6 +4828,9 @@ research_funding
 <td style="text-align:left;">
 10
 </td>
+<td style="text-align:right;">
+0.2333221
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -6041,6 +4847,9 @@ years_experience
 </td>
 <td style="text-align:left;">
 10
+</td>
+<td style="text-align:right;">
+0.0805413
 </td>
 </tr>
 <tr>
@@ -6059,6 +4868,9 @@ mentor_undergradTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0113807
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -6075,6 +4887,9 @@ mentor_postbacTRUE
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.1483506
 </td>
 </tr>
 <tr>
@@ -6093,6 +4908,9 @@ mentor_mastersTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.1160733
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -6109,6 +4927,9 @@ mentor_doctoralTRUE
 </td>
 <td style="text-align:left;">
 Indicator variable
+</td>
+<td style="text-align:right;">
+0.0211339
 </td>
 </tr>
 <tr>
@@ -6127,6 +4948,9 @@ mentor_postdocTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.4432577
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -6144,76 +4968,12 @@ mentor_ecrTRUE
 <td style="text-align:left;">
 Indicator variable
 </td>
+<td style="text-align:right;">
+0.0135004
+</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div id="success-by-grant-and-trainee-characteristics" class="section level2">
-<h2>Success by Grant and Trainee Characteristics</h2>
-<p>NOTE: This may not be useful, since data are scoped to respondent,
-not grant application…</p>
-<p>In fact, this doesn’t even converge…</p>
-<pre class="r"><code># grant_characteristics &lt;- c(
-#   &quot;supported_undergrad&quot;,
-#   &quot;supported_postbac&quot;,
-#   &quot;supported_masters&quot;,
-#   &quot;supported_doctoral&quot;,
-#   &quot;supported_postdoc&quot;,
-#   &quot;supported_ecr&quot;,
-#   &quot;parent_grant_type_R01&quot;,
-#   &quot;parent_grant_type_R34&quot;,
-#   &quot;parent_grant_type_R6133&quot;,
-#   &quot;parent_grant_type_other&quot;,
-#   &quot;parent_grant_year_1&quot;,
-#   &quot;parent_grant_year_2&quot;,
-#   &quot;parent_grant_year_3&quot;,
-#   &quot;parent_grant_year_4&quot;,
-#   &quot;parent_grant_year_5&quot;,
-#   &quot;parent_grant_year_NCE&quot;
-# )
-#
-# # Bivariate models
-# for(x in grant_characteristics) {
-#   
-#   model &lt;- glm(
-#     data = clean_data,
-#     formula = as.formula(&quot;div_sup_applied ~ &quot; %+% x),
-#     family = &quot;binomial&quot;
-#   )
-#   
-#   or &lt;- or_glm(clean_data, model, incr = list(
-#     age = 10,
-#     research_time = 10,
-#     research_funding = 10,
-#     years_experience = 10
-#   ))
-#   
-#   or %&gt;%
-#     kable() %&gt;%
-#     kable_styling() %&gt;%
-#     print()
-#   
-# }
-# 
-# # Combined model
-# combined_model &lt;- glm(
-#   data = clean_data,
-#   formula = as.formula(&quot;div_sup_applied ~ &quot; %+% paste0(grant_characteristics, collapse = &quot; + &quot;)),
-#   family = &quot;binomial&quot;
-# )
-# 
-# summary(combined_model)
-# 
-# or &lt;- or_glm(clean_data, combined_model, incr = list(
-#   age = 10,
-#   research_time = 10,
-#   research_funding = 10,
-#   years_experience = 10
-# ))
-#   
-# or %&gt;%
-#   kable() %&gt;%
-#   kable_styling()</code></pre>
 </div>
 <div id="barriers" class="section level2">
 <h2>Barriers</h2>
@@ -6228,6 +4988,7 @@ not grant application…</p>
   )
 
 barrier_summary_data %&gt;%
+  arrange(desc(n)) %&gt;%
   kable() %&gt;%
   kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -6251,6 +5012,125 @@ upper
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+No Qualifying Mentees
+</td>
+<td style="text-align:right;">
+655
+</td>
+<td style="text-align:right;">
+0.3561718
+</td>
+<td style="text-align:right;">
+0.3343385
+</td>
+<td style="text-align:right;">
+0.3786122
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unclear Re: Eligibility
+</td>
+<td style="text-align:right;">
+330
+</td>
+<td style="text-align:right;">
+0.1794454
+</td>
+<td style="text-align:right;">
+0.1623203
+</td>
+<td style="text-align:right;">
+0.1979275
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Not Familiar
+</td>
+<td style="text-align:right;">
+285
+</td>
+<td style="text-align:right;">
+0.1549755
+</td>
+<td style="text-align:right;">
+0.1388973
+</td>
+<td style="text-align:right;">
+0.1725158
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Other
+</td>
+<td style="text-align:right;">
+219
+</td>
+<td style="text-align:right;">
+0.1190865
+</td>
+<td style="text-align:right;">
+0.1048147
+</td>
+<td style="text-align:right;">
+0.1349754
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unclear Re: Process
+</td>
+<td style="text-align:right;">
+198
+</td>
+<td style="text-align:right;">
+0.1076672
+</td>
+<td style="text-align:right;">
+0.0940541
+</td>
+<td style="text-align:right;">
+0.1229473
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Not Enough Time/Energy
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+0.0522023
+</td>
+<td style="text-align:right;">
+0.0426908
+</td>
+<td style="text-align:right;">
+0.0636303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Not Worth the Time/Effort
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+0.0195759
+</td>
+<td style="text-align:right;">
+0.0139446
+</td>
+<td style="text-align:right;">
+0.0272949
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Didn’t Want To
@@ -6287,91 +5167,6 @@ No Incentives
 </tr>
 <tr>
 <td style="text-align:left;">
-No Qualifying Mentees
-</td>
-<td style="text-align:right;">
-655
-</td>
-<td style="text-align:right;">
-0.3561718
-</td>
-<td style="text-align:right;">
-0.3343385
-</td>
-<td style="text-align:right;">
-0.3786122
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Not Enough Time/Energy
-</td>
-<td style="text-align:right;">
-96
-</td>
-<td style="text-align:right;">
-0.0522023
-</td>
-<td style="text-align:right;">
-0.0426908
-</td>
-<td style="text-align:right;">
-0.0636303
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Not Familiar
-</td>
-<td style="text-align:right;">
-285
-</td>
-<td style="text-align:right;">
-0.1549755
-</td>
-<td style="text-align:right;">
-0.1388973
-</td>
-<td style="text-align:right;">
-0.1725158
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Not Worth the Time/Effort
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-0.0195759
-</td>
-<td style="text-align:right;">
-0.0139446
-</td>
-<td style="text-align:right;">
-0.0272949
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-219
-</td>
-<td style="text-align:right;">
-0.1190865
-</td>
-<td style="text-align:right;">
-0.1048147
-</td>
-<td style="text-align:right;">
-0.1349754
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Others Don’t
 </td>
 <td style="text-align:right;">
@@ -6387,40 +5182,6 @@ Others Don’t
 0.0035241
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Unclear Re: Eligibility
-</td>
-<td style="text-align:right;">
-330
-</td>
-<td style="text-align:right;">
-0.1794454
-</td>
-<td style="text-align:right;">
-0.1623203
-</td>
-<td style="text-align:right;">
-0.1979275
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Unclear Re: Process
-</td>
-<td style="text-align:right;">
-198
-</td>
-<td style="text-align:right;">
-0.1076672
-</td>
-<td style="text-align:right;">
-0.0940541
-</td>
-<td style="text-align:right;">
-0.1229473
-</td>
-</tr>
 </tbody>
 </table>
 <pre class="r"><code>barrier_summary_data %&gt;%
@@ -6432,575 +5193,6 @@ Unclear Re: Process
   coord_flip() +
   theme_classic()</code></pre>
 <p><img src="data:image/png;base64,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" width="672" /></p>
-<pre class="r"><code># Do non-White respondents experience different barriers?
-barriers_with_sufficient_n &lt;- clean_data %&gt;%
-  drop_na(race_ethnicity, top_barrier) %&gt;%
-  count(race_ethnicity != &quot;White non-Hispanic&quot;, top_barrier) %&gt;%
-  filter(n &gt;= 5) %&gt;%
-  count(top_barrier) %&gt;%
-  filter(n == 2) %&gt;%
-  pull(top_barrier)</code></pre>
-<pre class="r"><code>for(x in barriers_with_sufficient_n) {
-  
-  print(&quot;&lt;br&gt;&quot;)
-  
-  print(x)
-  
-  clean_data %&gt;%
-    count(race_ethnicity != &quot;White non-Hispanic&quot;, top_barrier == x) %&gt;%
-    rename(!!x := &quot;top_barrier == x&quot;) %&gt;%
-    drop_na() %&gt;%
-    group_by(`race_ethnicity != &quot;White non-Hispanic&quot;`) %&gt;%
-    mutate(groupwise_percent = percent(n / sum(n))) %&gt;%
-    kable() %&gt;%
-    kable_styling() %&gt;%
-    print()
-  
-  chisq.test(clean_data$race_ethnicity != &quot;White non-Hispanic&quot;, clean_data$top_barrier == x) %&gt;%
-    print_chisq()
-  
-}</code></pre>
-[1] “<br>” [1] “No Qualifying Mentees”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-No Qualifying Mentees
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-756
-</td>
-<td style="text-align:left;">
-64%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-434
-</td>
-<td style="text-align:left;">
-36%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-277
-</td>
-<td style="text-align:left;">
-71%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-113
-</td>
-<td style="text-align:left;">
-29%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 6.965, p = 0.008” [1] “<br>” [1] “Not Enough Time/Energy”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Not Enough Time/Energy
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1129
-</td>
-<td style="text-align:left;">
-95%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:left;">
-5%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-365
-</td>
-<td style="text-align:left;">
-94%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-25
-</td>
-<td style="text-align:left;">
-6%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 0.708, p = 0.4” [1] “<br>” [1] “Not Familiar”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Not Familiar
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1021
-</td>
-<td style="text-align:left;">
-86%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-169
-</td>
-<td style="text-align:left;">
-14%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-323
-</td>
-<td style="text-align:left;">
-83%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:left;">
-17%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 1.822, p = 0.177” [1] “<br>” [1] “Not Worth the
-Time/Effort”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Not Worth the Time/Effort
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1170
-</td>
-<td style="text-align:left;">
-98%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:left;">
-2%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-382
-</td>
-<td style="text-align:left;">
-98%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:left;">
-2%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 0.068, p = 0.795” [1] “<br>” [1] “Other”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Other
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1044
-</td>
-<td style="text-align:left;">
-88%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-146
-</td>
-<td style="text-align:left;">
-12%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-340
-</td>
-<td style="text-align:left;">
-87%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:left;">
-13%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 0.039, p = 0.843” [1] “<br>” [1] “Unclear Re: Eligibility”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Unclear Re: Eligibility
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-971
-</td>
-<td style="text-align:left;">
-82%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-219
-</td>
-<td style="text-align:left;">
-18%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-310
-</td>
-<td style="text-align:left;">
-79%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:left;">
-21%
-</td>
-</tr>
-</tbody>
-</table>
-[1] “X2 (1) = 0.72, p = 0.396” [1] “<br>” [1] “Unclear Re: Process”
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-race_ethnicity != “White non-Hispanic”
-</th>
-<th style="text-align:left;">
-Unclear Re: Process
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-groupwise_percent
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1057
-</td>
-<td style="text-align:left;">
-89%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-133
-</td>
-<td style="text-align:left;">
-11%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-346
-</td>
-<td style="text-align:left;">
-89%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-44
-</td>
-<td style="text-align:left;">
-11%
-</td>
-</tr>
-</tbody>
-</table>
-<p>[1] “X2 (1) = 0, p = 1”</p>
 </div>
 
 

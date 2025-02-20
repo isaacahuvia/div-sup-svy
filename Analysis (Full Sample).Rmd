@@ -176,11 +176,11 @@ combined_model <- glm(
   family = "binomial"
 )
 
-combined_model %>%
+p_values <- combined_model %>%
   summary() %>%
   coef() %>%
-  kable() %>%
-  kable_styling()
+  as_tibble(rownames = "predictor") %>%
+  select(predictor, p = `Pr(>|z|)`)
 
 or <- or_glm(clean_data, combined_model, incr = list(
   age = 10,
@@ -190,6 +190,7 @@ or <- or_glm(clean_data, combined_model, incr = list(
 ))
   
 or %>%
+  left_join(p_values, by = "predictor", relationship = "one-to-one") %>%
   kable() %>%
   kable_styling()
 ```
@@ -247,11 +248,11 @@ combined_model <- glm(
   family = "binomial"
 )
 
-combined_model %>%
+p_values <- combined_model %>%
   summary() %>%
   coef() %>%
-  kable() %>%
-  kable_styling()
+  as_tibble(rownames = "predictor") %>%
+  select(predictor, p = `Pr(>|z|)`)
 
 or <- or_glm(data_success, combined_model, incr = list(
   age = 10,
@@ -261,6 +262,7 @@ or <- or_glm(data_success, combined_model, incr = list(
 ))
   
 or %>%
+  left_join(p_values, by = "predictor", relationship = "one-to-one") %>%
   kable() %>%
   kable_styling()
 ```
