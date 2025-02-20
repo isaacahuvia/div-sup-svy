@@ -1,5 +1,5 @@
 ---
-title: "DivSup: Full-Sample Analyses for JAMA Letter"
+title: "DivSup: Full-Sample Analyses"
 output: html_document
 ---
 
@@ -20,6 +20,7 @@ clean_data <- readRDS(here("Data", "Clean Data.rds"))
 
 
 ## Set global variables
+# Vector of researcher characteristics
 researcher_characteristics <- c(
   "age",
   "gender_factor",
@@ -54,12 +55,13 @@ mean_sd <- function(x) {
   
 }
 
-# Return n's and percents for categorical variables
+# Return n's and percents for categorical variables, dropping NA's
 n_pct <- function(x) {
   
   clean_data %>%
     count(get(x)) %>%
     rename({{x}} := `get(x)`) %>%
+    drop_na() %>%
     mutate(pct = percent(n / sum(n), .1)) %>%
     kable() %>%
     kable_styling() %>%
@@ -102,12 +104,18 @@ print_chisq <- function(chisq.test) {
 
 ## Descriptive Statistics
 
+Means and standard deviations for continuous variables.
+
 ```{r}
 mean_sd("age")
 mean_sd("years_experience")
 mean_sd("research_time")
 mean_sd("research_funding")
+```
 
+Counts and percents for categorical variables, excluding missing values. Because not all participants responded to all questions, the overall N's will be different for some of these tables. Also note that some variables are recoded for analysis (more on that below, as it comes up).
+
+```{r}
 n_pct("gender")
 n_pct("race_ethnicity")
 n_pct("discipline")
@@ -119,12 +127,13 @@ n_pct("mentor_masters")
 n_pct("mentor_doctoral")
 n_pct("mentor_postdoc")
 n_pct("mentor_ecr")
-
 n_pct("div_sup_applied")
 n_pct("div_sup_granted")
 ```
 
-## Uptake by Researcher Characteristics
+## Application by Researcher Characteristics
+
+These first tables show the *bivariate models* - i.e., models that look at each IV in isolation, without controlling for other IVs. For models predicting application, race/ethnicity was recoded such that the categories AI/AN, NH/PI, multiple, and other were collapsed into "other".
 
 ```{r, results = "asis"}
 # Bivariate models
@@ -157,6 +166,8 @@ for(x in researcher_characteristics) {
 }
 ```
 
+This table includes results for the combined model.
+
 ```{r}
 # Combined model
 combined_model <- glm(
@@ -185,8 +196,11 @@ or %>%
 
 ## Success by Researcher Characteristics
 
+Same as above - this section is the bivariate models. Because the sample size for these analyses is smaller (limited to only respondents who applied for a DS), some new categorical variables had to be recoded (to prevent categories whose n's were too small to model). In addition to recoding race (as above), gender was recoded to make TGD (n = 4) NA (i.e., drop these respondents), discipline was recoded to make social psychology (n = 11) NA, and institution was recoded to make small college (n = 10) NA.
+
 ```{r, results = "asis"}
 data_success <- clean_data %>%
+  drop_na(div_sup_granted) %>%
   mutate(
     gender_factor = na_if(gender_factor, "TGD"),
     discipline_factor = na_if(discipline_factor, "Social Psychology"),
@@ -223,6 +237,8 @@ for(x in researcher_characteristics) {
 }
 ```
 
+And the combined model: 
+
 ```{r}
 # Combined model
 combined_model <- glm(
@@ -249,76 +265,6 @@ or %>%
   kable_styling()
 ```
 
-## Success by Grant and Trainee Characteristics 
-
-NOTE: This may not be useful, since data are scoped to respondent, not grant application...
-
-In fact, this doesn't even converge...
-
-```{r}
-# grant_characteristics <- c(
-#   "supported_undergrad",
-#   "supported_postbac",
-#   "supported_masters",
-#   "supported_doctoral",
-#   "supported_postdoc",
-#   "supported_ecr",
-#   "parent_grant_type_R01",
-#   "parent_grant_type_R34",
-#   "parent_grant_type_R6133",
-#   "parent_grant_type_other",
-#   "parent_grant_year_1",
-#   "parent_grant_year_2",
-#   "parent_grant_year_3",
-#   "parent_grant_year_4",
-#   "parent_grant_year_5",
-#   "parent_grant_year_NCE"
-# )
-#
-# # Bivariate models
-# for(x in grant_characteristics) {
-#   
-#   model <- glm(
-#     data = clean_data,
-#     formula = as.formula("div_sup_applied ~ " %+% x),
-#     family = "binomial"
-#   )
-#   
-#   or <- or_glm(clean_data, model, incr = list(
-#     age = 10,
-#     research_time = 10,
-#     research_funding = 10,
-#     years_experience = 10
-#   ))
-#   
-#   or %>%
-#     kable() %>%
-#     kable_styling() %>%
-#     print()
-#   
-# }
-# 
-# # Combined model
-# combined_model <- glm(
-#   data = clean_data,
-#   formula = as.formula("div_sup_applied ~ " %+% paste0(grant_characteristics, collapse = " + ")),
-#   family = "binomial"
-# )
-# 
-# summary(combined_model)
-# 
-# or <- or_glm(clean_data, combined_model, incr = list(
-#   age = 10,
-#   research_time = 10,
-#   research_funding = 10,
-#   years_experience = 10
-# ))
-#   
-# or %>%
-#   kable() %>%
-#   kable_styling()
-```
-
 ## Barriers
 
 ```{r}
@@ -333,6 +279,7 @@ barrier_summary_data <- clean_data %>%
   )
 
 barrier_summary_data %>%
+  arrange(desc(n)) %>%
   kable() %>%
   kable_styling()
 
@@ -344,36 +291,4 @@ barrier_summary_data %>%
   scale_y_continuous(name = NULL, labels = percent) +
   coord_flip() +
   theme_classic()
-
-# Do non-White respondents experience different barriers?
-barriers_with_sufficient_n <- clean_data %>%
-  drop_na(race_ethnicity, top_barrier) %>%
-  count(race_ethnicity != "White non-Hispanic", top_barrier) %>%
-  filter(n >= 5) %>%
-  count(top_barrier) %>%
-  filter(n == 2) %>%
-  pull(top_barrier)
-```
-
-```{r, results = "asis"}
-for(x in barriers_with_sufficient_n) {
-  
-  print("<br>")
-  
-  print(x)
-  
-  clean_data %>%
-    count(race_ethnicity != "White non-Hispanic", top_barrier == x) %>%
-    rename(!!x := "top_barrier == x") %>%
-    drop_na() %>%
-    group_by(`race_ethnicity != "White non-Hispanic"`) %>%
-    mutate(groupwise_percent = percent(n / sum(n))) %>%
-    kable() %>%
-    kable_styling() %>%
-    print()
-  
-  chisq.test(clean_data$race_ethnicity != "White non-Hispanic", clean_data$top_barrier == x) %>%
-    print_chisq()
-  
-}
 ```
